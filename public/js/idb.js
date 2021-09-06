@@ -1,5 +1,3 @@
-const response  = require("express");
-
 // create variable to hold db connection
 let db;
 
@@ -17,7 +15,7 @@ request.onupgradeneeded = function (event) {
 // upon a succesful
 request.onsuccess = function(event) {
     // when the db is succesfully created with its object store (from onupgradeneeded event above) or simply establish a connection, save reference to db in global variable
-    const db = event.target.result
+    db = event.target.result
     // check if app is online, if yes run uploadTransaction() function to send all local db data to api
     if (navigator.onLine) {
         // we haven't created this yet so let's comment it out for now
@@ -33,7 +31,7 @@ request.onerror = function(event) {
 // this function will be executed if we try to submit a new transaction and there is no internet connection
 function saveRecord(record) {
     // open a new transcation with the db with read and write permissions
-    const transaction = db.transaction(["new_transaction"], "readWrite")
+    const transaction = db.transaction(["new_transaction"], "readwrite")
 
     // access the object store for "new-transaction"
     const transactionObjectStore = transaction.objectStore("new_transaction")
@@ -44,7 +42,7 @@ function saveRecord(record) {
 
 function uploadTransaction() {
     // open a transaction on your db
-    const transaction = db.transaction(["new_transaction"], "readWrite")
+    const transaction = db.transaction(["new_transaction"], "readwrite")
 
     // access your object store
     const transactionObjectStore = transaction.objectStore("new_transaction")
@@ -54,8 +52,8 @@ function uploadTransaction() {
 
     // upon a successful .getAll() execution, run this function
     getAll.onsuccess = function() {
-        if (getAll.reult.length > 0) {
-            fetch("/api/transactions", {
+        if (getAll.result.length > 0) {
+            fetch("/api/transaction/bulk", {
                 method: "POST",
                 body: JSON.stringify(getAll.result),
                 headers: {
