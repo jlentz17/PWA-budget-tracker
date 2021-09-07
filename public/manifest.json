@@ -6,7 +6,6 @@
   "description": "An app that allows you to track your budget.",
   "start_url": "/",
   "display": "standalone",
-
   "icons": [
     {
       "src": "public/icons/icon-72x72.png",
