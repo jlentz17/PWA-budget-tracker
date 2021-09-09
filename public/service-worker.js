@@ -6,7 +6,7 @@ const FILES_TO_CACHE = [
   "./index.html",
   "./js/idb.js",
   "./js/index.js",
-  "./css/style.css",
+  "./css/styles.css",
   "./icons/icon-72x72.png",
   "./icons/icon-96x96.png",
   "./icons/icon-128x128.png",
@@ -40,7 +40,7 @@ self.addEventListener("activate", function (e) {
       );
     })
   );
-  self.ClientRectList.claim();
+  self.ClientReactList.claim();
 });
 
 self.addEventListener("fetch", function (e) {
